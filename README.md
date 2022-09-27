@@ -29,11 +29,11 @@ To get a local copy up and running follow these simple example steps.
 
 ## Authors
 
-👤 **Author1**
+👤 **Mnemba Chambuya**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@mnekx](https://github.com/mnekx)
+- Twitter: [@MnembaChambuya](https://twitter.com/MnembaChambuya)
+- LinkedIn: [mnemba-chambuya](https://linkedin.com/in/mnemba-chambuya)
 
 ## 🤝 Contributing
 
