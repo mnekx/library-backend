@@ -1,14 +1,13 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Books library
+# Books library backend
 
-> Books management app.
+> A back end for Books management app.
 
 
 ## Built With
 
 - JavaScript, Node.js
-- React, React Native
 - JSON Web Token (JWT)
 
 ## Live Demo (if available)
