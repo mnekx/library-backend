@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     const books = await Book.find();
     res.json(books);
   } catch (error) {
-    res.json({ message: error });
+    res.json({ error });
   }
 });
 
@@ -17,7 +17,7 @@ router.get('/:bookId', async (req, res) => {
     const queriedBook = await Book.findById(req.params.bookId);
     res.json(queriedBook);
   } catch (error) {
-    res.json({ message: error });
+    res.json({ error });
   }
 });
 
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
       const createdBook = await book.save();
       res.json(createdBook);
     } catch (error) {
-      res.json({ message: error });
+      res.json({ error });
     }
   }
 });
@@ -48,7 +48,7 @@ router.delete('/:bookId', async (req, res) => {
       const deletedBook = await Book.deleteOne({ _id: req.params.bookId });
       res.json(deletedBook);
     } catch (error) {
-      res.json({ message: error });
+      res.json({ error });
     }
   }
 });
@@ -65,7 +65,7 @@ router.patch('/:bookId', async (req, res) => {
       );
       res.json(updatedBook);
     } catch (error) {
-      res.json({ message: error });
+      res.json({ error });
     }
   }
 });
