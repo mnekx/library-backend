@@ -20,12 +20,11 @@
 To get a local copy up and running follow these simple example steps.
 
 ### Install
-
-### Run tests
-
-### Deployment
-
-
+1. git clone https://github.com/mnekx/library-backend.git
+2. cd library-backend
+3. npm install
+4. npm start
+5. the API is now listening on port 3001
 
 ## Authors
 
