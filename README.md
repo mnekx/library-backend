@@ -10,13 +10,6 @@
 - JavaScript, Node.js
 - JSON Web Token (JWT)
 
-## Live Demo (if available)
-
-[Live Demo Link](https://livedemo.com)
-
-
-
-
 To get a local copy up and running follow these simple example steps.
 
 ### Install
