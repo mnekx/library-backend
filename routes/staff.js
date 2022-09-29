@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     const staffs = await Staff.find();
     res.json(staffs);
   } catch (error) {
-    res.json({ message: error });
+    res.json({ error });
   }
 });
 
@@ -18,11 +18,11 @@ router.get('/:staffId', async (req, res) => {
     const user =
       typeof req.body.user != 'undefined' ? req.body.user : undefined;
     if (req.params.staffId !== user._id || user.role !== 'administrator')
-      res.status(403).send({ message: 'Not authorized!' });
+      res.status(403).send({ error: 'Not authorized!' });
     const queriedStaff = await Staff.findById(req.params.staffId);
     res.json(queriedStaff);
   } catch (error) {
-    res.json({ message: error });
+    res.json({ error });
   }
 });
 
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
 
     // Validate user input
     if (!(email && password)) {
-      res.status(400).send({ message: 'All input is required' });
+      res.status(400).send({ error: 'All input is required' });
     }
 
     // check if user already exist
@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
     if (oldUser) {
       return res
         .status(409)
-        .send({ message: 'User Already Exist. Please Login' });
+        .send({ error: 'User Already Exist. Please Login' });
     }
 
     //Encrypt user password
@@ -70,19 +70,19 @@ router.post('/', async (req, res) => {
 router.delete('/:staffId', async (req, res) => {
   const user = typeof req.body.user != 'undefined' ? req.body.user : undefined;
   if (req.params.staffId !== user._id || user.role !== 'administrator')
-    res.status(403).send({ message: 'Not authorized!' });
+    res.status(403).send({ error: 'Not authorized!' });
   try {
     const deletedStaff = await Staff.deleteOne({ _id: req.params.staffId });
     res.json(deletedStaff);
   } catch (error) {
-    res.json({ message: error });
+    res.json({ error });
   }
 });
 
 router.patch('/:staffId', async (req, res) => {
   const user = typeof req.body.user != 'undefined' ? req.body.user : undefined;
   if (req.params.staffId !== user._id || user.role !== 'administrator')
-    res.status(403).send({ message: 'Not authorized!' });
+    res.status(403).send({ error: 'Not authorized!' });
   try {
     const updatedStaff = await Staff.updateOne(
       { _id: req.params.staffId },
@@ -90,7 +90,7 @@ router.patch('/:staffId', async (req, res) => {
     );
     res.json(updatedStaff);
   } catch (error) {
-    res.json({ message: error });
+    res.json({ error });
   }
 });
 
