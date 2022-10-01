@@ -117,9 +117,9 @@ app.get('/api', (req, res) => {
   res.json({ message: 'Hello from server!' });
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+// });
 
 mongoose.connect(process.env.MONGO_URI, () => console.log('connected to DB!'));
 
