@@ -29,14 +29,10 @@ router.get('/:staffId', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     // Get user input
-    const { email, password } = req.body;
-    const role =
-      typeof req.body.role == 'string' && req.body.role.length > 0
-        ? req.body.role
-        : undefined;
+    const { email, password, role } = req.body;
 
     // Validate user input
-    if (!(email && password)) {
+    if (!(email && password && role)) {
       res.status(400).send({ error: 'All input is required' });
     }
 
@@ -57,7 +53,7 @@ router.post('/', async (req, res) => {
     const user = await Staff.create({
       email: email.toLowerCase(), // sanitize: convert email to lowercase
       password: encryptedPassword,
-      role: role,
+      role,
     });
 
     // return new user
@@ -69,7 +65,7 @@ router.post('/', async (req, res) => {
 
 router.delete('/:staffId', async (req, res) => {
   const user = typeof req.body.user != 'undefined' ? req.body.user : undefined;
-  if (req.params.staffId !== user._id || user.role !== 'administrator')
+  if (user.role !== 'administrator')
     res.status(403).send({ error: 'Not authorized!' });
   try {
     const deletedStaff = await Staff.deleteOne({ _id: req.params.staffId });
@@ -80,17 +76,32 @@ router.delete('/:staffId', async (req, res) => {
 });
 
 router.patch('/:staffId', async (req, res) => {
-  const user = typeof req.body.user != 'undefined' ? req.body.user : undefined;
-  if (req.params.staffId !== user._id || user.role !== 'administrator')
+  const editor =
+    typeof req.body.user != 'undefined' ? req.body.user : undefined;
+
+  if (editor.role !== 'administrator') {
     res.status(403).send({ error: 'Not authorized!' });
-  try {
-    const updatedStaff = await Staff.updateOne(
-      { _id: req.params.staffId },
-      { $set: req.body }
-    );
-    res.json(updatedStaff);
-  } catch (error) {
-    res.json({ error });
+  } else {
+    try {
+      const { email, password, role } = req.body;
+
+      // Validate user input
+      if (!(email && password && role)) {
+        res.status(400).send({ error: 'All input is required' });
+      }
+
+      //Encrypt user password
+      const encryptedPassword = await bcrypt.hash(password, 10);
+
+      const updatedStaff = await Staff.updateOne(
+        { _id: req.params.staffId },
+        { $set: { email, password: encryptedPassword, role } }
+      );
+
+      res.json(updatedStaff);
+    } catch (error) {
+      res.json({ error, some: 'klshflgsdflskdf' });
+    }
   }
 });
 
