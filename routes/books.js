@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
       const createdBook = await book.save();
       res.json(createdBook);
     } catch (error) {
-      res.json({ error });
+      res.json({ error: 'All input is required' });
     }
   }
 });
